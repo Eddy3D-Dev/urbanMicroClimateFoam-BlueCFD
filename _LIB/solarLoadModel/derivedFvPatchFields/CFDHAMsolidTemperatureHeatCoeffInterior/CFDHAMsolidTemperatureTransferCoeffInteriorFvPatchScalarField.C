@@ -148,13 +148,16 @@ void CFDHAMsolidTemperatureTransferCoeffInteriorFvPatchScalarField::updateCoeffs
         TambValueIO
     );
     scalar TambValue_ = TambValue.value(time.value());
-    scalarField q_conv = hcoeff_*(TambValue_-Tp); 
-    //scalarField q_conv = (muair/Pr + alphatNbr)*cp*(TcNbr-Tp)*deltaCoeff_;      
+          
+	refValue() = TambValue_;
+    refGrad() = 0;
 
-    valueFraction() = 0;
-    refValue() = 0;
-    refGrad() = (q_conv)/(lambda_m);
-
+    const scalarField kappaDeltaCoeffs
+    (
+        lambda_m * patch().deltaCoeffs()
+    );
+    valueFraction() = hcoeff_ / (hcoeff_ + kappaDeltaCoeffs);
+    
     mixedFvPatchScalarField::updateCoeffs(); 
 
     // Restore tag
