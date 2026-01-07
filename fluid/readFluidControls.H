@@ -48,4 +48,17 @@ scalar minFluidIteration =
 Info << "maxFluidIteration: " << maxFluidIteration << endl;
 Info << "minFluidIteration: " << minFluidIteration << endl;
 
+minFluidIteration = min
+                    (
+                      max
+                      (
+                        minFluidIteration,
+                        2
+                      ),
+                      maxFluidIteration
+                    );
+
+Info << "maxFluidIteration: " << maxFluidIteration << endl;
+Info << "minFluidIteration: " << minFluidIteration << endl;
+
 // ************************************************************************* //

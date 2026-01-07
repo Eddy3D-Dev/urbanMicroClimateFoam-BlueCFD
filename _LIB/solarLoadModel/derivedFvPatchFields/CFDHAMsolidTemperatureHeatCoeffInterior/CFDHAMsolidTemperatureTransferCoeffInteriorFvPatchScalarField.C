@@ -148,9 +148,15 @@ void CFDHAMsolidTemperatureTransferCoeffInteriorFvPatchScalarField::updateCoeffs
         TambValueIO
     );
     scalar TambValue_ = TambValue.value(time.value());
-          
-	refValue() = TambValue_;
+
+    refValue() = TambValue_;
     refGrad() = 0;
+
+    const scalarField kappaDeltaCoeffs
+    (
+        lambda_m * patch().deltaCoeffs()
+    );
+    valueFraction() = hcoeff_ / (hcoeff_ + kappaDeltaCoeffs);
 
     const scalarField kappaDeltaCoeffs
     (
