@@ -8,11 +8,18 @@ An open-source solver for coupled physical processes modeling urban microclimate
 
 ## Installation with `BlueCFD-2020-1`
 
-1. Start `blueCFD-Core terminal` 
-2. Type `git clone https://github.com/Eddy3D-Dev/urbanMicroClimateFoam-BlueCFD`
-3. Type `cd urbanMicroClimateFoam-BlueCFD`
-4. Type `git checkout of-org_v8.0-bluecfd`
-5. Type `./Allwclean && ./Allwmake`
+Execute the following commands in the BlueCFD terminal:
+
+```
+git clone https://github.com/Eddy3D-Dev/urbanMicroClimateFoam-BlueCFD
+cd urbanMicroClimateFoam-BlueCFD
+git checkout of-org_v8.0-bluecfd
+./Allwclean && ./Allwmake
+```
+
+
+
+
 6. It should produce no errors and end compilation in
 
 ```
