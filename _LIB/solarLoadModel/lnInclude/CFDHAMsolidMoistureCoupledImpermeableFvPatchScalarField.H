@@ -1,0 +1,1 @@
+#include "../derivedFvPatchFields/CFDHAMsolidMoistureCoupledImpermeable/CFDHAMsolidMoistureCoupledImpermeableFvPatchScalarField.H"

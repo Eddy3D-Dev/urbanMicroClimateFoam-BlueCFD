@@ -1,0 +1,1 @@
+#include "../derivedFvPatchFields/CFDHAMsolidMoistureTransferCoeff/CFDHAMsolidMoistureTransferCoeffFvPatchScalarField.H"

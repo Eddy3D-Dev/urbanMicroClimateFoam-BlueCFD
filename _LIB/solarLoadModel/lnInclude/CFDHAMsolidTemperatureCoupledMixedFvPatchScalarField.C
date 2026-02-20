@@ -1,0 +1,1 @@
+#include "../derivedFvPatchFields/CFDHAMsolidTemperatureCoupledMixed/CFDHAMsolidTemperatureCoupledMixedFvPatchScalarField.C"

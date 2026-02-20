@@ -1,0 +1,1 @@
+#include "../solarLoadModel/solarLoadModelNew.C"

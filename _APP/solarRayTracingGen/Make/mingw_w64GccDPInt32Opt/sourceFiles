@@ -1,0 +1,3 @@
+SOURCE = \
+solarRayTracingGen.C \
+version_of_build.rc

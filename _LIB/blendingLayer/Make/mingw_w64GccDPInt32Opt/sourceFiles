@@ -1,0 +1,5 @@
+SOURCE = \
+blendingLayer.C \
+derivedFvPatchFields/readScalarField/readFieldFvPatchScalarField.C \
+derivedFvPatchFields/readVectorField/readFieldFvPatchVectorField.C \
+version_of_build.rc

@@ -1,0 +1,1 @@
+#include "../derivedFvPatchFields/CFDHAMsolidTemperatureHeatCoeff/CFDHAMsolidTemperatureTransferCoeffFvPatchScalarField.H"

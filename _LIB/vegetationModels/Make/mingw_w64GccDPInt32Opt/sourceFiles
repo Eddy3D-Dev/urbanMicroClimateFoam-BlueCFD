@@ -1,0 +1,7 @@
+SOURCE = \
+vegetationModel/vegetationModel.C \
+vegetationModel/vegetationModelNew.C \
+noVegetation/noVegetation.C \
+simplifiedVegetation/simplifiedVegetation.C \
+derivedFvPatchFields/mappedLeafTemperature/mappedLeafTempFvPatchScalarField.C \
+version_of_build.rc

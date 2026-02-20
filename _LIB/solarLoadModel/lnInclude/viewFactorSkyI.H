@@ -1,0 +1,1 @@
+#include "../viewFactorSky/viewFactorSkyI.H"
