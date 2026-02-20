@@ -2,7 +2,7 @@ fvMesh& mesh = solidRegions[i];
 
 Info<< "Reading buildingMaterial Information\n" << endl;
 
-PtrList<dictionary> Materials(solidTransportProperties[i].lookup("buildingMaterials"));
+PtrList<dictionary> Materials(solidTransportProperties[i].lookup("buildingMaterials"));   
 
 volScalarField& rho_m = rho_mSolid[i];
 volScalarField& cap_m = cap_mSolid[i];

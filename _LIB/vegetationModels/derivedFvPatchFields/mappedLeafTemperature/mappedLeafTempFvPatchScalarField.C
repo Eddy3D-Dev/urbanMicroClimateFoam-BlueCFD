@@ -119,18 +119,18 @@ void Foam::mappedLeafTempFvPatchScalarField::updateCoeffs()
     {
         return;
     }
-
+    
     //this->operator==(this->mappedField());
-
-    //The default nearestCell mapping will sometimes map from a cell with Tl = 0
+	
+	//The default nearestCell mapping will sometimes map from a cell with Tl = 0
     //Replaced with the part below based on Foam::meshSearch::findNearestCellLinear function
     //but we are searching only within the cells where Tl is defined
 
     const fvMesh& airMesh = this->sampleField().mesh();
     const volScalarField& Tl = airMesh.lookupObject<volScalarField>("Tl");
-
+    
     scalarField& Tp = *this;
-
+    
     List<List<point>> vegCellCentres(Pstream::nProcs());
     List<List<scalar>> vegCellValues(Pstream::nProcs());
     forAll(Tl.internalField(), cellI)
@@ -175,7 +175,7 @@ void Foam::mappedLeafTempFvPatchScalarField::updateCoeffs()
 
         //update value
         Tp[i] = nearest[i].second();
-    }
+    }   
 
     fixedValueFvPatchScalarField::updateCoeffs();
 }

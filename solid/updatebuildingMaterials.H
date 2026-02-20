@@ -42,6 +42,7 @@ forAll(Materials, MaterialsI)
         {
             cellType[celli] = MaterialsI;
         }
+		
         buildingMaterial->update_w_C_cell(pc,ws,Crel,celli);
         buildingMaterial->update_Krel_cell(pc,ws,Krel,celli);
         buildingMaterial->update_Kv_cell(pc,ws,Ts,K_v,celli);

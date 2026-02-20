@@ -300,10 +300,9 @@ void Foam::grass::simpleGrass::calculate
 
             scalar Tg_min = 250.0;
             scalar Tg_max = 400.0;
-            bool boundTg = false;
-            if((min(Tg_new) < Tg_min) or (max(Tg_new) > Tg_max))
+            if((gMin(Tg_new) < Tg_min) or (gMax(Tg_new) > Tg_max))
             {
-                boundTg = true;
+                Info << "Warning, bounding Tg..." << endl;
                 Tg_new = min
                 (
                     Tg_new,
@@ -314,12 +313,6 @@ void Foam::grass::simpleGrass::calculate
                     Tg_new,
                     Tg_min
                 );
-            }
-            reduce(boundTg, orOp<bool>());
-            if(boundTg)
-            {
-                Info << "Warning, bounding Tg..." << endl;
-                boundTg = false;
             }
 
             // info

@@ -6,22 +6,17 @@ An open-source solver for coupled physical processes modeling urban microclimate
 
 ---
 
-## Installation with `BlueCFD-Core-2020-1`
+## Installation with `BlueCFD-2020-1`
 
-Execute the following commands in the BlueCFD terminal:
-
-```bash
-git clone --branch of-org_v8.0-bluecfd https://github.com/Eddy3D-Dev/urbanMicroClimateFoam-BlueCFD
-cd urbanMicroClimateFoam-BlueCFD
-git checkout 98d62585a7f9f97c7bc6a3a5b6e7e00e70819494
-./Allwclean && ./Allwmake
-```
-
-A successful compilation will end with a message similar to:
+1. Start `blueCFD-Core terminal` 
+2. Type `git clone https://github.com/Eddy3D-Dev/urbanMicroClimateFoam-BlueCFD`
+3. Type `cd urbanMicroClimateFoam-BlueCFD`
+4. Type `git checkout of-org_v8.0-bluecfd`
+5. Type `./Allwclean && ./Allwmake`
+6. It should produce no errors and end compilation in
 
 ```
 C:/PROGRA~1/BLUECF~1/ofuser-of8/platforms/mingw_w64GccDPInt32Opt/bin/urbanMicroclimateFoam.pdb: cannot load PDB helper DLL
 Error occurred with cv2pdb, have stripped binary as a workaround.
 ```
 
-This is expected — the solver has compiled correctly.
