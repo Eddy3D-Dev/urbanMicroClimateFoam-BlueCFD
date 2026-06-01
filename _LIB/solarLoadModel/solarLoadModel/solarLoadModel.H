@@ -47,7 +47,7 @@ SourceFiles
 #include "runTimeSelectionTables.H"
 #include "addToRunTimeSelectionTable.H"
 #include "volFields.H"
-#include "DimensionedField.T.H"
+#include "DimensionedField.H"
 #include "fvMatricesFwd.H"
 #include "Switch.H"
 

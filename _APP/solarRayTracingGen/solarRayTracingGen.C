@@ -33,25 +33,25 @@ Description
 
 #include "argList.H"
 #include "fvMesh.H"
-#include "Time.H"
+#include "foamTimeCompat.H"
 #include "volFields.H"
 #include "surfaceFields.H"
 #include "distributedTriSurfaceMeshBugFix.H"
-#include "cyclicAMIPolyPatch.H"
+#include "cyclicTransform.H"
 #include "triSurfaceTools.H"
-#include "mapDistribute.H"
+#include "distributionMap.H"
 
 #include "OFstream.H"
 #include "meshTools.H"
 #include "plane.H"
 #include "uindirectPrimitivePatch.H"
-#include "DynamicField.T.H"
+#include "DynamicField.H"
 #include "IFstream.H"
 #include "unitConversion.H"
 
 #include "mathematicalConstants.H"
 #include "scalarMatrices.H"
-#include "CompactListList.T.H"
+#include "CompactListList.H"
 #include "labelIOList.H"
 #include "labelListIOList.H"
 #include "scalarListIOList.H"
@@ -62,12 +62,14 @@ Description
 #include "IOdictionary.H"
 #include "fixedValueFvPatchFields.H"
 #include "wallFvPatch.H"
+#include "mappedInternalFvPatch.H"
 
 #include "unitConversion.H"
+#include "dimensionSets.H"
+#include "polygonTriangulate.H"
+#include "randomGenerator.H"
 
-#include "regionProperties.H"
-
-#include "TableFile.T.H"
+#include "Table.H"
 
 using namespace Foam;
 
@@ -92,31 +94,30 @@ triSurface triangulate
     label newPatchi = 0;
     label localTriFacei = 0;
 
+    polygonTriangulate triEngine;
+
     forAllConstIter(labelHashSet, includePatches, iter)
     {
         const label patchi = iter.key();
         const polyPatch& patch = bMesh[patchi];
         const pointField& points = patch.points();
 
-        label nTriTotal = 0;
-
         forAll(patch, patchFacei)
         {
             const face& f = patch[patchFacei];
 
-            faceList triFaces(f.nTriangles(points));
+            triEngine.triangulate(UIndirectList<point>(points, f));
 
-            label nTri = 0;
-
-            f.triangles(points, nTri, triFaces);
-
-            forAll(triFaces, triFacei)
+            forAll(triEngine.triPoints(), triFacei)
             {
-                const face& f = triFaces[triFacei];
-
-                triangles.append(labelledTri(f[0], f[1], f[2], newPatchi));
-
-                nTriTotal++;
+                triangles.append
+                (
+                    labelledTri
+                    (
+                        triEngine.triPoints(triFacei, f),
+                        newPatchi
+                    )
+                );
 
                 triSurfaceToAgglom[localTriFacei++] = globalNumbering.toGlobal
                 (
@@ -171,7 +172,7 @@ int main(int argc, char *argv[])
     #include "addRegionOption.H"
     #include "setRootCase.H"
     #include "createTime.H"
-    #include "createNamedMesh.H"
+    #include "createRegionMeshNoChangers.H"
     
     // Read view factor dictionary
     IOdictionary viewFactorDict
@@ -191,46 +192,52 @@ int main(int argc, char *argv[])
     // Read sunPosVector list
     dictionary sunPosVectorIO;
     sunPosVectorIO.add(
-        "file", 
+        "file",
         fileName
         (
             mesh.time().constant()
             /"sunPosVector"
         )
     );
-    Function1s::TableFile<vector> sunPosVector
+    Function1s::Table<vector> sunPosVector
     (
         "sunPosVector",
+        dimTime,
+        dimless,
         sunPosVectorIO
     );
     // Read solar radiation intensity flux
     dictionary IDNIO;
     IDNIO.add(
-        "file", 
+        "file",
         fileName
         (
             mesh.time().constant()
             /"IDN"
         )
     );
-    Function1s::TableFile<scalar> IDN
+    Function1s::Table<scalar> IDN
     (
         "IDN",
+        dimTime,
+        dimless,
         IDNIO
     );
     // Read diffuse solar radiation intensity flux
     dictionary IdifIO;
     IdifIO.add(
-        "file", 
+        "file",
         fileName
         (
             mesh.time().constant()
             /"Idif"
         )
     );
-    Function1s::TableFile<scalar> Idif
+    Function1s::Table<scalar> Idif
     (
         "Idif",
+        dimTime,
+        dimless,
         IdifIO
     );
     
@@ -245,7 +252,7 @@ int main(int argc, char *argv[])
         IOobject
         (
             "qr",
-            runTime.timeName(),
+            runTime.name(),
             mesh,
             IOobject::MUST_READ,
             IOobject::NO_WRITE
@@ -280,7 +287,7 @@ int main(int argc, char *argv[])
         IOobject
         (
             "coarse:" + mesh.name(),
-            runTime.timeName(),
+            runTime.name(),
             runTime,
             IOobject::NO_READ,
             IOobject::NO_WRITE
@@ -320,7 +327,16 @@ int main(int argc, char *argv[])
         const fvPatchScalarField& qrpI = qrb[patchi];
 
         //if ((isA<fixedValueFvPatchScalarField>(QrpI)) && (pp.size() > 0))
-        if ((isA<wallFvPatch>(mesh.boundary()[patchi])) && (pp.size() > 0))
+        // v12: also include mappedInternal patches (e.g. air_to_vegetation)
+        // which were mappedWall in v8 but changed to mappedInternal in v12
+        if
+        (
+            (
+                isA<wallFvPatch>(mesh.boundary()[patchi])
+             || isA<mappedInternalFvPatch>(mesh.boundary()[patchi])
+            )
+         && (pp.size() > 0)
+        )
         {
             viewFactorsPatches[count] = qrpI.patch().index();
             nCoarseFaces += coarsePatches[patchi].size();
@@ -768,8 +784,16 @@ int main(int argc, char *argv[])
     label j = 0;
     label faceNoAll = 0;
 
-    regionProperties rp(runTime); 
-    const wordList vegNames(rp["vegetation"]); 
+    // Read vegetation region names from controlDict (v12 style)
+    wordList vegNames;
+    if (runTime.controlDict().found("regions"))
+    {
+        const dictionary& regionsDict = runTime.controlDict().subDict("regions");
+        if (regionsDict.found("vegetation"))
+        {
+            vegNames = wordList(regionsDict.lookup("vegetation"));
+        }
+    } 
     scalarListIOList kcLAIboundaryList
     (
         IOobject
@@ -781,7 +805,7 @@ int main(int argc, char *argv[])
             IOobject::NO_WRITE
         )
     );   
-    if (vegNames.size()>0 && !kcLAIboundaryList.typeHeaderOk<IOList<scalarList>>())
+    if (vegNames.size()>0 && !kcLAIboundaryList.headerOk())
     {
         FatalErrorInFunction
             << "File kcLAIboundary not found! Did you not run calcLAI before?"

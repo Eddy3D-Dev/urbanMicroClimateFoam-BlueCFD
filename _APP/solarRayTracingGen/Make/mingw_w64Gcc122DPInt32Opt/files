@@ -1,0 +1,5 @@
+SOURCE += solarRayTracingGen.C
+
+EXE = $(FOAM_USER_APPBIN)/solarRayTracingGen
+EXE_INC += -DLIBS_TO_LOAD="\"OpenFOAM,distributed,distributedBugFix,fileFormats,finiteVolume,meshTools,radiationModels,triSurface\""
+SOURCE += version_of_build.rc

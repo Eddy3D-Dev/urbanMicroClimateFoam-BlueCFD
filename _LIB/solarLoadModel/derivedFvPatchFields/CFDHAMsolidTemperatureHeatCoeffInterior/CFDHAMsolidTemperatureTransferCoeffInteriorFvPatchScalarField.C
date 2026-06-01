@@ -28,7 +28,8 @@ License
 #include "fvPatchFieldMapper.H"
 #include "volFields.H"
 #include "fixedValueFvPatchFields.H"
-#include "TableFile.T.H"
+#include "Function1.H"
+#include "Table.H"
 #include "uniformDimensionedFields.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -138,13 +139,16 @@ void CFDHAMsolidTemperatureTransferCoeffInteriorFvPatchScalarField::updateCoeffs
     Time& time = const_cast<Time&>(this->patch().boundaryMesh().mesh().time());
     
     dictionary TambValueIO;
+    TambValueIO.add("type", "table");
     TambValueIO.add(
-        "file", 
+        "file",
         Tamb_
     );
-    Function1s::TableFile<scalar> TambValue
+    Function1s::Table<scalar> TambValue
     (
         "TambValue",
+        dimTime,
+        dimTemperature,
         TambValueIO
     );
     scalar TambValue_ = TambValue.value(time.value());
@@ -158,12 +162,6 @@ void CFDHAMsolidTemperatureTransferCoeffInteriorFvPatchScalarField::updateCoeffs
     );
     valueFraction() = hcoeff_ / (hcoeff_ + kappaDeltaCoeffs);
 
-    const scalarField kappaDeltaCoeffs
-    (
-        lambda_m * patch().deltaCoeffs()
-    );
-    valueFraction() = hcoeff_ / (hcoeff_ + kappaDeltaCoeffs);
-    
     mixedFvPatchScalarField::updateCoeffs(); 
 
     // Restore tag

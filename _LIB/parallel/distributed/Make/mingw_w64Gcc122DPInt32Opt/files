@@ -1,0 +1,5 @@
+SOURCE += distributedTriSurfaceMeshBugFix/distributedTriSurfaceMeshBugFix.C
+
+LIB = $(FOAM_USER_LIBBIN)/libdistributedBugFix
+RESOURCE_ONLY = LIBS_TO_LOAD="\"decompositionMethods,meshTools,triSurface\""
+SOURCE += version_of_build.rc

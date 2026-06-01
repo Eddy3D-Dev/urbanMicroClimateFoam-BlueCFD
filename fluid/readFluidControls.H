@@ -34,19 +34,6 @@ scalar maxFluidIteration =
 
 scalar minFluidIteration =
     runTime.controlDict().lookupOrDefault<scalar>("minFluidIteration", 1);
-	
-	minFluidIteration = min
-                    (
-                      max
-                      (
-                        minFluidIteration,
-                        2
-                      ),
-                      maxFluidIteration
-                    );
-
-Info << "maxFluidIteration: " << maxFluidIteration << endl;
-Info << "minFluidIteration: " << minFluidIteration << endl;
 
 minFluidIteration = min
                     (

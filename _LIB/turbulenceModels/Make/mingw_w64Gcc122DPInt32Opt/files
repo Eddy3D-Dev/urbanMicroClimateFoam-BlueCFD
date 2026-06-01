@@ -1,0 +1,5 @@
+SOURCE += makeTurbModel.C
+
+LIB = $(FOAM_USER_LIBBIN)/libporousCompressibleRASModels
+RESOURCE_ONLY = LIBS_TO_LOAD="\"compressibleMomentumTransportModels,finiteVolume,meshTools,momentumTransportModels,physicalProperties\""
+SOURCE += version_of_build.rc

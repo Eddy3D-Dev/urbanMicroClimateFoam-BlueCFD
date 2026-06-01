@@ -31,9 +31,15 @@ License
 #include "addToRunTimeSelectionTable.H"
 
 #include "wallFvPatch.H"
-#include "TableFile.T.H"
+#include "Function1.H"
+#include "Table.H"
+#include "IFstream.H"
+#include "OFstream.H"
+#include "OSspecific.H"
 
-#include "mappedPatchBase.H"
+//#include "mappedPatchBase.H" //v8
+#include "mappedFvPatchBaseBase.H" //v12
+#include "mappedInternalFvPatch.H"
 
 using namespace Foam::constant;
 
@@ -130,7 +136,7 @@ void Foam::radiationModels::viewFactorSky::initialise()
 
     map_.reset
     (
-        new mapDistribute
+        new distributionMap
         (
             consMapDim[0],
             move(subMap),
@@ -275,7 +281,7 @@ Foam::radiationModels::viewFactorSky::viewFactorSky(const volScalarField& T)
         IOobject
         (
             "qr",
-            mesh_.time().timeName(),
+            mesh_.time().name(),
             mesh_,
             IOobject::MUST_READ,
             IOobject::AUTO_WRITE
@@ -333,7 +339,7 @@ Foam::radiationModels::viewFactorSky::viewFactorSky
         IOobject
         (
             "qr",
-            mesh_.time().timeName(),
+            mesh_.time().name(),
             mesh_,
             IOobject::MUST_READ,
             IOobject::AUTO_WRITE
@@ -421,8 +427,9 @@ void Foam::radiationModels::viewFactorSky::calculate()
     //label timestep = ceil( (time.value()/3600)-1E-6 ); timestep = timestep%24;
     
     dictionary TambientIO;
+    TambientIO.add("type", "table");
     TambientIO.add(
-        "file", 
+        "file",
         fileName
         (
             mesh_.time().rootPath()
@@ -430,9 +437,11 @@ void Foam::radiationModels::viewFactorSky::calculate()
             /"0/air/Tambient"
         )
     );
-    Function1s::TableFile<scalar> Tambient
+    Function1s::Table<scalar> Tambient
     (
         "Tambient",
+        dimTime,
+        dimTemperature,
         TambientIO
     );
     //////////////////////////////////////////////////////////////////////////
@@ -448,15 +457,18 @@ void Foam::radiationModels::viewFactorSky::calculate()
     {
         Info << "Reading cloud cover values..." << endl;
         dictionary cloudCoverIO;
+        cloudCoverIO.add("type", "table");
         cloudCoverIO.add(
-            "file", 
+            "file",
             cloudCoverFile
         );
-        Function1s::TableFile<scalar> cloudCover
+        Function1s::Table<scalar> cloudCover
         (
             "cloudCover",
+            dimTime,
+            dimless,
             cloudCoverIO
-        );        
+        );
         cc = cloudCover.value(time.value());
     }
     else
@@ -479,7 +491,7 @@ void Foam::radiationModels::viewFactorSky::calculate()
             IOobject::NO_WRITE
         )
     );
-    if (grassProperties.typeHeaderOk<IOdictionary>(true))
+    if (grassProperties.headerOk())
     {
         word grassModel(grassProperties.lookup("grassModel"));
         if (grassModel != "none")
@@ -502,16 +514,20 @@ void Foam::radiationModels::viewFactorSky::calculate()
         {
             if(mesh_.name() == "vegetation")
             {
-                // Get the coupling information from the mappedPatchBase
-                const mappedPatchBase& mpp =
-                    refCast<const mappedPatchBase>(mesh_.boundary()[patchID].patch());
-                const polyMesh& nbrMesh = mpp.sampleMesh();
-                const label samplePatchI = mpp.samplePolyPatch().index();
-                const fvPatch& nbrPatch =
-                    refCast<const fvMesh>(nbrMesh).boundary()[samplePatchI];
-                scalarField TgNbr = nbrPatch.lookupPatchField<volScalarField, scalar>("Tg");
-                    mpp.distribute(TgNbr);
-                Tg_ = TgNbr;
+                // Get the mapper and the neighbouring patch
+                //v8: const mappedPatchBase& mpp =
+                //v8:     refCast<const mappedPatchBase>(mesh_.boundary()[patchID].patch());
+                //v8: const polyMesh& nbrMesh = mpp.sampleMesh();
+                //v8: const fvPatch& nbrPatch =
+                //v8:     refCast<const fvMesh>(nbrMesh).boundary()[mpp.samplePolyPatch().index()];
+                //v8: scalarField TgNbr = nbrPatch.lookupPatchField<volScalarField, scalar>("Tg");
+                //v8: mpp.distribute(TgNbr);
+                const mappedFvPatchBaseBase& mapperVeg =
+                    mappedFvPatchBaseBase::getMap(mesh_.boundary()[patchID]);
+                const fvPatch& nbrPatch = mapperVeg.nbrFvPatch();
+                tmp<scalarField> TgNbr = mapperVeg.fromNeighbour(
+                    nbrPatch.lookupPatchField<volScalarField, scalar>("Tg"));
+                Tg_ = TgNbr();
             }
             else
             {
@@ -561,7 +577,12 @@ void Foam::radiationModels::viewFactorSky::calculate()
                 forAll(fineFaces, j)
                 {
                     label facei = fineFaces[j];
-                    if (!isA<wallFvPatch>(mesh_.boundary()[patchID])) // added to take into account sky temperature
+                    // v12: mappedInternal patches are physical surfaces, not sky
+                    if
+                    (
+                        !isA<wallFvPatch>(mesh_.boundary()[patchID])
+                     && !isA<mappedInternalFvPatch>(mesh_.boundary()[patchID])
+                    )
                     {
                         scalar Tambient_ = Tambient.value(time.value());
                         scalar ec = (1-0.84*cc)*(0.527 + 0.161*Foam::exp(8.45*(1-273/Tambient_))) +0.84*cc; //cloud emissivity
@@ -753,7 +774,12 @@ void Foam::radiationModels::viewFactorSky::calculate()
                 }
             }
 
-            Info<< "\nLU Back substitute C matrix.." << endl;
+            if (debug)
+            {
+                InfoInFunction
+                    << "\nLU Back substitute C matrix.." << endl;
+            }
+
             LUBacksubstitute(CLU_(), pivotIndices_, q);
             iterCounter_ ++;
         }

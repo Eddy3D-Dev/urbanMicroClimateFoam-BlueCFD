@@ -27,6 +27,8 @@ License
 #include "addToRunTimeSelectionTable.H"
 #include "volFields.H"
 #include "Tuple2.H"
+//v8: #include "mappedFvPatchBaseBase.H"
+#include "mappedInternalPatchBase.H" //v12: mappedInternal uses separate class hierarchy
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
@@ -38,7 +40,8 @@ mappedLeafTempFvPatchScalarField
 )
 :
     fixedValueFvPatchScalarField(p, iF),
-    mappedPatchFieldBase<scalar>(this->mapper(p, iF), *this)
+    fieldName_(iF.name())
+    //v8: mapperPtr_(nullptr)
 {}
 
 
@@ -51,8 +54,16 @@ mappedLeafTempFvPatchScalarField
 )
 :
     fixedValueFvPatchScalarField(p, iF, dict),
-    mappedPatchFieldBase<scalar>(this->mapper(p, iF), *this, dict)
-{}
+    fieldName_(dict.lookupOrDefault<word>("field", iF.name()))
+{
+    if (!isA<mappedInternalPatchBase>(p.patch()))
+    {
+        FatalIOErrorInFunction(dict)
+            << "Field " << iF.name() << " on patch " << p.name()
+            << " is not of mappedInternal type"
+            << exit(FatalIOError);
+    }
+}
 
 
 Foam::mappedLeafTempFvPatchScalarField::
@@ -61,22 +72,11 @@ mappedLeafTempFvPatchScalarField
     const mappedLeafTempFvPatchScalarField& ptf,
     const fvPatch& p,
     const DimensionedField<scalar, volMesh>& iF,
-    const fvPatchFieldMapper& mapper
+    const fieldMapper& mapper
 )
 :
     fixedValueFvPatchScalarField(ptf, p, iF, mapper),
-    mappedPatchFieldBase<scalar>(this->mapper(p, iF), *this, ptf)
-{}
-
-
-Foam::mappedLeafTempFvPatchScalarField::
-mappedLeafTempFvPatchScalarField
-(
-    const mappedLeafTempFvPatchScalarField& ptf
-)
-:
-    fixedValueFvPatchScalarField(ptf),
-    mappedPatchFieldBase<scalar>(ptf)
+    fieldName_(ptf.fieldName_)
 {}
 
 
@@ -88,28 +88,16 @@ mappedLeafTempFvPatchScalarField
 )
 :
     fixedValueFvPatchScalarField(ptf, iF),
-    mappedPatchFieldBase<scalar>(this->mapper(this->patch(), iF), *this, ptf)
+    fieldName_(ptf.fieldName_)
 {}
 
 
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
-const Foam::mappedPatchBase& Foam::mappedLeafTempFvPatchScalarField::mapper
-(
-    const fvPatch& p,
-    const DimensionedField<scalar, volMesh>& iF
-)
+const Foam::mappedInternalPatchBase&
+Foam::mappedLeafTempFvPatchScalarField::mapper() const
 {
-    if (!isA<mappedPatchBase>(p.patch()))
-    {
-        FatalErrorInFunction
-            << "' not type '" << mappedPatchBase::typeName << "'"
-            << "\n    for patch " << p.patch().name()
-            << " of field " << iF.name()
-            << " in file " << iF.objectPath()
-            << exit(FatalError);
-    }
-    return refCast<const mappedPatchBase>(p.patch());
+    return refCast<const mappedInternalPatchBase>(this->patch().patch());
 }
 
 
@@ -120,25 +108,27 @@ void Foam::mappedLeafTempFvPatchScalarField::updateCoeffs()
         return;
     }
 
-    //this->operator==(this->mappedField());
+    const int oldTag = UPstream::msgType();
+    UPstream::msgType() = oldTag + 1;
 
-    //The default nearestCell mapping will sometimes map from a cell with Tl = 0
-    //Replaced with the part below based on Foam::meshSearch::findNearestCellLinear function
-    //but we are searching only within the cells where Tl is defined
-
-    const fvMesh& airMesh = this->sampleField().mesh();
+    const mappedInternalPatchBase& mipb = this->mapper();
+    const fvMesh& airMesh = refCast<const fvMesh>(mipb.nbrMesh());
     const volScalarField& Tl = airMesh.lookupObject<volScalarField>("Tl");
+    const volScalarField& LAD = airMesh.lookupObject<volScalarField>("LAD");
 
     scalarField& Tp = *this;
 
     List<List<point>> vegCellCentres(Pstream::nProcs());
     List<List<scalar>> vegCellValues(Pstream::nProcs());
-    forAll(Tl.internalField(), cellI)
+    const scalarField& TlI = Tl.primitiveField();
+    const scalarField& LADI = LAD.primitiveField();
+    const vectorField& CI = airMesh.cellCentres();
+    forAll(TlI, cellI)
     {
-        if (Tl.internalField()[cellI] > 0)
+        if (LADI[cellI] > 0 && TlI[cellI] > 0)
         {
-            vegCellCentres[Pstream::myProcNo()].append(airMesh.cellCentres()[cellI]);
-            vegCellValues[Pstream::myProcNo()].append(Tl.internalField()[cellI]);
+            vegCellCentres[Pstream::myProcNo()].append(CI[cellI]);
+            vegCellValues[Pstream::myProcNo()].append(TlI[cellI]);
         }
     }
     Pstream::gatherList(vegCellCentres);
@@ -177,6 +167,8 @@ void Foam::mappedLeafTempFvPatchScalarField::updateCoeffs()
         Tp[i] = nearest[i].second();
     }
 
+    UPstream::msgType() = oldTag;
+
     fixedValueFvPatchScalarField::updateCoeffs();
 }
 
@@ -184,7 +176,7 @@ void Foam::mappedLeafTempFvPatchScalarField::updateCoeffs()
 void Foam::mappedLeafTempFvPatchScalarField::write(Ostream& os) const
 {
     fvPatchScalarField::write(os);
-    mappedPatchFieldBase<scalar>::write(os);
+    writeEntry(os, "field", fieldName_);
     writeEntry(os, "value", *this);
 }
 

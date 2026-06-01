@@ -45,7 +45,7 @@ SourceFiles
 
 #include "typeInfo.H"
 #include "volFields.H"
-#include "DimensionedField.T.H"
+#include "DimensionedField.H"
 #include "meshSearch.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

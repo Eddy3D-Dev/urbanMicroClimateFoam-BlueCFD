@@ -1,0 +1,6 @@
+SOURCE += simpleControlFluid.C
+
+LIB = $(FOAM_USER_LIBBIN)/libsimpleControlFluid
+
+RESOURCE_ONLY = LIBS_TO_LOAD="\"finiteVolume,meshTools,triSurface\""
+SOURCE += version_of_build.rc

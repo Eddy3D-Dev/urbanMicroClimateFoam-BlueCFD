@@ -1,0 +1,4 @@
+-I./_blueCFDCompat/include
+-I./fluid
+-I./solid
+-I./veg

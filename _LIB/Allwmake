@@ -5,10 +5,11 @@ makeType=${1:-libso}
 set -x
 
 wmake $makeType buildingMaterialModel
-wmake $makeType solarLoadModel
-wmake $makeType simpleControlFluid
 wmake $makeType grassModel
-wmake $makeType turbulenceModels
-wmake $makeType vegetationModels
-wmake $makeType parallel/distributed
 wmake $makeType blendingLayer
+wmake $makeType vegetationModels
+wmake $makeType solarLoadModel
+wmake $makeType parallel/distributed
+wmake $makeType simpleControlFluid
+
+wmake $makeType turbulenceModels

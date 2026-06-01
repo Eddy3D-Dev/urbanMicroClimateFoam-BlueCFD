@@ -1,20 +1,19 @@
 EXE_INC = \
+    -I../../_blueCFDCompat/include \
+    -I$(LIB_SRC)/fileFormats/lnInclude \
     -I$(LIB_SRC)/triSurface/lnInclude \
     -I$(LIB_SRC)/parallel/distributed/lnInclude \
     -I$(LIB_SRC)/meshTools/lnInclude \
     -I$(LIB_SRC)/finiteVolume/lnInclude \
     -I$(LIB_SRC)/OpenFOAM/lnInclude \
-    -I$(LIB_SRC)/regionModels/regionModel/lnInclude \
     -I../../_LIB/parallel/distributed/lnInclude
 
 EXE_LIBS = \
+    -lfileFormats \
     -lmeshTools \
     -lfiniteVolume \
     -lOpenFOAM \
     -ltriSurface \
     -ldistributed \
     -lradiationModels \
-    -lregionModels \
-    -L$(FOAM_USER_LIBBIN) \
-	-ldistributedBugFix
-	
+    -L$(FOAM_USER_LIBBIN) -ldistributedBugFix

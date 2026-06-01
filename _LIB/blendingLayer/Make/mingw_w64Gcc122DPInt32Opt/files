@@ -1,0 +1,8 @@
+SOURCE += blendingLayer.C
+
+SOURCE += derivedFvPatchFields/readScalarField/readFieldFvPatchScalarField.C
+SOURCE += derivedFvPatchFields/readVectorField/readFieldFvPatchVectorField.C
+
+LIB = $(FOAM_USER_LIBBIN)/libblendingLayer
+RESOURCE_ONLY = LIBS_TO_LOAD="\"finiteVolume,meshTools\""
+SOURCE += version_of_build.rc

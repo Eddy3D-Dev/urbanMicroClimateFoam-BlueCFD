@@ -26,7 +26,7 @@ License
 #include "noSolarLoad.H"
 #include "physicoChemicalConstants.H"
 #include "fvMesh.H"
-#include "Time.H"
+#include "foamTimeCompat.H"
 #include "volFields.H"
 
 // * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
@@ -88,7 +88,7 @@ Foam::tmp<Foam::volScalarField> Foam::solarLoad::noSolarLoad::Rp() const
             IOobject
             (
                 "Rp",
-                mesh_.time().timeName(),
+                mesh_.time().name(),
                 mesh_,
                 IOobject::NO_READ,
                 IOobject::NO_WRITE
@@ -115,7 +115,7 @@ Foam::solarLoad::noSolarLoad::Ru() const
             IOobject
             (
                 "Ru",
-                mesh_.time().timeName(),
+                mesh_.time().name(),
                 mesh_,
                 IOobject::NO_READ,
                 IOobject::NO_WRITE

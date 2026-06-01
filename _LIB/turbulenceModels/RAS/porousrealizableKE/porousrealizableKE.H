@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Copyright (C) 2011-2018 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2023 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -25,32 +25,8 @@ Class
     Foam::RASModels::porousrealizableKE
 
 Description
-    Realizable k-epsilon turbulence model for incompressible and compressible
-    flows.
-
-    References:
-    \verbatim
-        Shih, T. H., Liou, W. W., Shabbir, A., Yang, Z., & Zhu, J. (1994).
-        A new k-epsilon eddy viscosity model for high Reynolds number
-        turbulent flows: Model development and validation.
-        NASA STI/Recon Technical Report N, 95, 11442.
-
-        Shih, T. H., Liou, W. W., Shabbir, A., Yang, Z., & Zhu, J. (1995).
-        A New k-epsilon Eddy Viscosity Model for High Reynolds Number
-        Turbulent Flows.
-        Computers and Fluids, 24(3), 227-238.
-    \endverbatim
-
-    The default model coefficients are
-    \verbatim
-        porousrealizableKECoeffs
-        {
-            A0          4.0;
-            C2          1.9;
-            sigmak      1.0;
-            sigmaEps    1.2;
-        }
-    \endverbatim
+    Realizable k-epsilon turbulence model for compressible flows with added
+    vegetation source terms.
 
 SourceFiles
     porousrealizableKE.C
@@ -63,159 +39,122 @@ SourceFiles
 #include "RASModel.H"
 #include "eddyViscosity.H"
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
 namespace Foam
 {
 namespace RASModels
 {
-
-/*---------------------------------------------------------------------------*\
-                        Class porousrealizableKE Declaration
-\*---------------------------------------------------------------------------*/
 
 template<class BasicMomentumTransportModel>
 class porousrealizableKE
 :
     public eddyViscosity<RASModel<BasicMomentumTransportModel>>
 {
-
 protected:
 
-    // Protected data
+    dimensionedScalar A0_;
+    dimensionedScalar C2_;
+    dimensionedScalar C4_;
+    dimensionedScalar C5_;
+    dimensionedScalar sigmak_;
+    dimensionedScalar sigmaEps_;
+    dimensionedScalar betaP_;
+    dimensionedScalar betaD_;
 
-        // Model coefficients
+    scalar Cd_;
 
-            dimensionedScalar A0_;
-            dimensionedScalar C2_;
-            dimensionedScalar C4_;
-            dimensionedScalar C5_;  
-            dimensionedScalar sigmak_;
-            dimensionedScalar sigmaEps_;
-            dimensionedScalar betaP_;
-            dimensionedScalar betaD_;  
+    volScalarField k_;
+    volScalarField epsilon_;
+    volScalarField LAD_;
 
-            scalar Cd_;
+    void boundEpsilon();
 
-        // Fields
+    tmp<volScalarField> rCmu
+    (
+        const volTensorField& gradU,
+        const volScalarField& S2,
+        const volScalarField& magS
+    );
 
-            volScalarField k_;
-            volScalarField epsilon_;
-            volScalarField LAD_;
+    virtual void correctNut
+    (
+        const volTensorField& gradU,
+        const volScalarField& S2,
+        const volScalarField& magS
+    );
 
-
-   // Protected Member Functions
-
-        tmp<volScalarField> rCmu
-        (
-            const volTensorField& gradU,
-            const volScalarField& S2,
-            const volScalarField& magS
-        );
-
-        virtual void correctNut
-        (
-            const volTensorField& gradU,
-            const volScalarField& S2,
-            const volScalarField& magS
-        );
-
-        virtual void correctNut();
-        virtual tmp<fvScalarMatrix> kSource() const;
-        virtual tmp<fvScalarMatrix> epsilonSource() const;
-
+    virtual void correctNut();
+    virtual tmp<fvScalarMatrix> kSource() const;
+    virtual tmp<fvScalarMatrix> epsilonSource() const;
 
 public:
 
     typedef typename BasicMomentumTransportModel::alphaField alphaField;
     typedef typename BasicMomentumTransportModel::rhoField rhoField;
-    typedef typename BasicMomentumTransportModel::transportModel transportModel;
 
-
-    //- Runtime type information
     TypeName("porousrealizableKE");
 
-    // Constructors
+    porousrealizableKE
+    (
+        const alphaField& alpha,
+        const rhoField& rho,
+        const volVectorField& U,
+        const surfaceScalarField& alphaRhoPhi,
+        const surfaceScalarField& phi,
+        const viscosity& viscosity,
+        const word& type = typeName
+    );
 
-        //- Construct from components
-        porousrealizableKE
-        (
-            const alphaField& alpha,
-            const rhoField& rho,
-            const volVectorField& U,
-            const surfaceScalarField& alphaRhoPhi,
-            const surfaceScalarField& phi,
-            const transportModel& transport,
-            const word& type = typeName
-        );
-
-
-    //- Destructor
     virtual ~porousrealizableKE()
     {}
 
+    virtual bool read();
 
-    // Member Functions
+    tmp<volScalarField> DkEff() const
+    {
+        return volScalarField::New
+        (
+            "DkEff",
+            (this->nut_/sigmak_ + this->nu())
+        );
+    }
 
-        //- Re-read model coefficients if they have changed
-        virtual bool read();
+    tmp<volScalarField> DepsilonEff() const
+    {
+        return volScalarField::New
+        (
+            "DepsilonEff",
+            (this->nut_/sigmaEps_ + this->nu())
+        );
+    }
 
-        //- Return the effective diffusivity for k
-        tmp<volScalarField> DkEff() const
-        {
-            return tmp<volScalarField>
-            (
-                new volScalarField
-                (
-                    "DkEff",
-                    (this->nut_/sigmak_ + this->nu())
-                )
-            );
-        }
+    virtual tmp<volScalarField> k() const
+    {
+        return k_;
+    }
 
-        //- Return the effective diffusivity for epsilon
-        tmp<volScalarField> DepsilonEff() const
-        {
-            return tmp<volScalarField>
-            (
-                new volScalarField
-                (
-                    "DepsilonEff",
-                    (this->nut_/sigmaEps_ + this->nu())
-                )
-            );
-        }
+    virtual tmp<volScalarField> epsilon() const
+    {
+        return epsilon_;
+    }
 
-        //- Return the turbulence kinetic energy
-        virtual tmp<volScalarField> k() const
-        {
-            return k_;
-        }
+    virtual tmp<volScalarField> omega() const
+    {
+        return volScalarField::New
+        (
+            "omega",
+            epsilon_/(0.09*k_)
+        );
+    }
 
-        //- Return the turbulence kinetic energy dissipation rate
-        virtual tmp<volScalarField> epsilon() const
-        {
-            return epsilon_;
-        }
-
-        //- Solve the turbulence equations and correct the turbulence viscosity
-        virtual void correct();
+    virtual void correct();
 };
-
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 } // End namespace RASModels
 } // End namespace Foam
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 #ifdef NoRepository
     #include "porousrealizableKE.C"
 #endif
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
 #endif
 
-// ************************************************************************* //

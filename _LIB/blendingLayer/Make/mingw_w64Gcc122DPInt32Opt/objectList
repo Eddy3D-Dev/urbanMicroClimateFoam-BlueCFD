@@ -1,0 +1,4 @@
+Make/mingw_w64Gcc122DPInt32Opt/blendingLayer.o
+Make/mingw_w64Gcc122DPInt32Opt/derivedFvPatchFields/readScalarField/readFieldFvPatchScalarField.o
+Make/mingw_w64Gcc122DPInt32Opt/derivedFvPatchFields/readVectorField/readFieldFvPatchVectorField.o
+Make/mingw_w64Gcc122DPInt32Opt/version_of_build.o

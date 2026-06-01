@@ -1,0 +1,8 @@
+SOURCE += grassModel/grassModel.C
+SOURCE += grassModel/grassModelNew.C
+SOURCE += noGrass/noGrass.C
+SOURCE += simpleGrass/simpleGrass.C
+
+LIB=$(FOAM_USER_LIBBIN)/libgrassModel
+RESOURCE_ONLY = LIBS_TO_LOAD="\"finiteVolume,meshTools\""
+SOURCE += version_of_build.rc

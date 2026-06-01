@@ -29,13 +29,18 @@ License
 #include "solarLoadViewFactorFixedValueFvPatchScalarField.H"
 #include "wallFvPatch.H"
 #include "typeInfo.H"
-#include "Time.H"
+#include "foamTimeCompat.H"
 
 #include "vectorIOList.H"
 
-#include "TableFile.T.H"
+#include "Function1.H"
+#include "Table.H"
+#include "IFstream.H"
+#include "OFstream.H"
+#include "OSspecific.H"
 
 #include "mappedPatchBase.H"
+#include "mappedInternalFvPatch.H"
 
 using namespace Foam::constant;
 
@@ -69,13 +74,19 @@ void Foam::solarLoad::directAndDiffuse::initialise()
             selectedPatches_[count] = qsPatchI.patch().index();
             nLocalCoarseFaces_ += coarsePatches[patchI].size();
             
-            if ((isA<wallFvPatch>(mesh_.boundary()[patchI])))
+            // v12: mappedInternal patches (e.g. air_to_vegetation) need
+            // wall-like treatment for solar radiation
+            if
+            (
+                isA<wallFvPatch>(mesh_.boundary()[patchI])
+             || isA<mappedInternalFvPatch>(mesh_.boundary()[patchI])
+            )
             {
                 wallPatchOrNot_[count] = 1;
                 nLocalWallCoarseFaces_ += coarsePatches[patchI].size();
                 nLocalFineFaces_ += qsPatchI.patch().size();
-            }    
-            
+            }
+
             count++;
         }
     }
@@ -84,8 +95,8 @@ void Foam::solarLoad::directAndDiffuse::initialise()
     Info << "wallPatchOrNot_: " << wallPatchOrNot_ << endl;
     Info << "nLocalWallCoarseFaces_: " << nLocalWallCoarseFaces_ << endl;
     
-    selectedPatches_.resize(count--);
-    wallPatchOrNot_.resize(count--);
+    selectedPatches_.resize(count);
+    wallPatchOrNot_.resize(count);
 
     Info<< "Selected patches:" << selectedPatches_ << endl;
     Info<< "Number of coarse faces:" << nLocalCoarseFaces_ << endl;
@@ -150,7 +161,7 @@ void Foam::solarLoad::directAndDiffuse::initialise()
 
     map_.reset
     (
-        new mapDistribute
+        new distributionMap
         (
             consMapDim[0],
             move(subMap),
@@ -431,7 +442,7 @@ Foam::solarLoad::directAndDiffuse::directAndDiffuse(const volScalarField& T)
         IOobject
         (
             "qs",
-            mesh_.time().timeName(),
+            mesh_.time().name(),
             mesh_,
             IOobject::MUST_READ,
             IOobject::AUTO_WRITE
@@ -497,7 +508,7 @@ Foam::solarLoad::directAndDiffuse::directAndDiffuse
         IOobject
         (
             "Qs",
-            mesh_.time().timeName(),
+            mesh_.time().name(),
             mesh_,
             IOobject::MUST_READ,
             IOobject::AUTO_WRITE
@@ -722,17 +733,20 @@ void Foam::solarLoad::directAndDiffuse::calculate()
     Time& time = const_cast<Time&>(mesh_.time());   
     // Read sunPosVector list
     dictionary sunPosVectorIO;
+    sunPosVectorIO.add("type", "table");
     sunPosVectorIO.add(
-        "file", 
+        "file",
         fileName
         (
             mesh_.time().constant()
             /"sunPosVector"
         )
     );
-    Function1s::TableFile<vector> sunPosVector
+    Function1s::Table<vector> sunPosVector
     (
         "sunPosVector",
+        dimTime,
+        dimless,
         sunPosVectorIO
     );           
     // look for the correct range
@@ -909,7 +923,11 @@ void Foam::solarLoad::directAndDiffuse::calculate()
                     label faceI = fineFaces[k];
 
                     qsp[faceI] = q[globalCoarse];
-                    if (isA<wallFvPatch>(mesh_.boundary()[patchID]))
+                    if
+                    (
+                        isA<wallFvPatch>(mesh_.boundary()[patchID])
+                     || isA<mappedInternalFvPatch>(mesh_.boundary()[patchID])
+                    )
                     {
                         label globalFine =
                             globalNumberingFine.toGlobal(Pstream::myProcNo(), fineFaceNo+faceI);   
@@ -921,7 +939,11 @@ void Foam::solarLoad::directAndDiffuse::calculate()
                 globCoarseId ++;
             }
         }
-        if (isA<wallFvPatch>(mesh_.boundary()[patchID]))
+        if
+        (
+            isA<wallFvPatch>(mesh_.boundary()[patchID])
+         || isA<mappedInternalFvPatch>(mesh_.boundary()[patchID])
+        )
         {
             fineFaceNo += pp.size();
         }
@@ -954,7 +976,7 @@ Foam::tmp<Foam::volScalarField> Foam::solarLoad::directAndDiffuse::Rp() const
             IOobject
             (
                 "Rp",
-                mesh_.time().timeName(),
+                mesh_.time().name(),
                 mesh_,
                 IOobject::NO_READ,
                 IOobject::NO_WRITE,
@@ -982,7 +1004,7 @@ Foam::solarLoad::directAndDiffuse::Ru() const
             IOobject
             (
                 "Ru",
-                mesh_.time().timeName(),
+                mesh_.time().name(),
                 mesh_,
                 IOobject::NO_READ,
                 IOobject::NO_WRITE,
