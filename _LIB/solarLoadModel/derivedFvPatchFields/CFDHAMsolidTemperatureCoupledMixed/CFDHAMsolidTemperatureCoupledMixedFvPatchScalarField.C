@@ -38,7 +38,6 @@ License
 #include "IOdictionary.H"
 #include "OSspecific.H"
 
-
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace Foam
@@ -221,7 +220,7 @@ void CFDHAMsolidTemperatureCoupledMixedFvPatchScalarField::updateCoeffs()
     tmp<scalarField> alphatNbr = mapper.fromNeighbour(nbrPatch.lookupPatchField<volScalarField, scalar>("alphat"));
     tmp<scalarField> nutNbr = mapper.fromNeighbour(nbrPatch.lookupPatchField<volScalarField, scalar>("nut")); 
     
-    scalarField q_conv = (muair/Pr + alphatNbr())*cp*(TcNbr()-Tp)*deltaCoeff_();
+    scalarField q_conv = (muair/Pr + alphatNbr())*cp*(TcNbr()-Tp)*deltaCoeff_(); 
             
     scalarField pvsat_s = exp(6.58094e1-7.06627e3/Tp-5.976*log(Tp));
     scalarField pv_s = pvsat_s*exp((pc)/(rhol*Rv*Tp));
@@ -356,20 +355,10 @@ void CFDHAMsolidTemperatureCoupledMixedFvPatchScalarField::updateCoeffs()
             const fvPatch& vegiNbrPatch =
                 refCast<const fvMesh>(vegiMesh).boundary()[patchi];
 
-            //v8: constructed ad-hoc mappedPatchBase from solid to vegetation
-            //v8: const mappedPatchBase& mppVeg = mappedPatchBase(patch().patch(), vegiRegion, mpp.mode(), mpp.samplePatch(), 0);
-            //v8: qsNbr = vegiNbrPatch.lookupPatchField(...); mppVeg.distribute(qsNbr);
-            //v12: direct solid→veg mapping via ad-hoc mappedPatchBase (equivalent to v8)
-            //     fromNeighbour maps veg field directly onto solid patch faces
-            //     Constructed from a dictionary so the geometric-similarity check
-            //     runs with the same relaxed matchTolerance the case's mapped
-            //     patches use: the components constructor pins matchTolerance to
-            //     the 1e-4 default, which rejects solid<->vegetation patch pairs
-            //     on real urban geometry (patch centroids ~1% of scale apart).
             dictionary directMapperDict;
             directMapperDict.add("neighbourRegion", vegiRegion);
             directMapperDict.add("neighbourPatch", nbrPatchName);
-            directMapperDict.add("matchTolerance", 0.1);
+            directMapperDict.add("matchTolerance", 0.1); // Eddy3D: 0.1 not 0.05 - real urban solid/veg pairs sit ~2% of scale apart, keep the margin
             const mappedPatchBase directMapper
             (
                 patch().patch(),
