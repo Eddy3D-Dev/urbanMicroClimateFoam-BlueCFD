@@ -157,12 +157,6 @@ void CFDHAMsolidTemperatureTransferCoeffInteriorFvPatchScalarField::updateCoeffs
         lambda_m * patch().deltaCoeffs()
     );
     valueFraction() = hcoeff_ / (hcoeff_ + kappaDeltaCoeffs);
-
-    const scalarField kappaDeltaCoeffs
-    (
-        lambda_m * patch().deltaCoeffs()
-    );
-    valueFraction() = hcoeff_ / (hcoeff_ + kappaDeltaCoeffs);
     
     mixedFvPatchScalarField::updateCoeffs(); 
 

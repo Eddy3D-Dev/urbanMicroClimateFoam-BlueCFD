@@ -60,7 +60,7 @@ SourceFiles
 #ifndef porousrealizableKE_H
 #define porousrealizableKE_H
 
-#include "RASModel.H"
+#include "RASModel.T.H"
 #include "eddyViscosity.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

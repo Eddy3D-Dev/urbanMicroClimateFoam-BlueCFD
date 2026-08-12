@@ -1,10 +1,10 @@
-#include "CompressibleMomentumTransportModel.H"
+#include "CompressibleMomentumTransportModel.T.H"
 #include "fluidThermo.H"
 #include "addToRunTimeSelectionTable.H"
 #include "makeMomentumTransportModel.H"
 
-#include "RASModel.H"
-#include "LESModel.H"
+#include "RASModel.T.H"
+#include "LESModel.T.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

@@ -10,5 +10,5 @@ EXE_INC = -I$(LIB_SRC)/triSurface/lnInclude -I$(LIB_SRC)/parallel/distributed/ln
 
 
 
-EXE_LIBS = -lmeshTools -lfiniteVolume -lOpenFOAM -ltriSurface -ldistributed -lradiationModels $(FOAM_USER_LIBBIN)/libdistributedBugFix.so
-EXE_INC += -DLIBS_TO_LOAD="\"meshTools,finiteVolume,OpenFOAM,triSurface,distributed,radiationModels\""
+EXE_LIBS = -lmeshTools -lfiniteVolume -lOpenFOAM -ltriSurface -ldistributed -lradiationModels -L$(FOAM_USER_LIBBIN) 	-ldistributedBugFix
+EXE_INC += -DLIBS_TO_LOAD="\"meshTools,finiteVolume,OpenFOAM,triSurface,distributed,radiationModels,distributedBugFix\""
