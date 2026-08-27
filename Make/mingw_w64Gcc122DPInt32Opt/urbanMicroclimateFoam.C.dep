@@ -1,5 +1,5 @@
-$(OBJECTS_DIR)/urbanMicroclimateFoam.C.dep: \
-urbanMicroclimateFoam.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/$(OBJECTS_DIR)/urbanMicroclimateFoam.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/urbanMicroclimateFoam.C \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/argList.H \
 _blueCFDCompat/include/foamTimeCompat.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvMesh.H \

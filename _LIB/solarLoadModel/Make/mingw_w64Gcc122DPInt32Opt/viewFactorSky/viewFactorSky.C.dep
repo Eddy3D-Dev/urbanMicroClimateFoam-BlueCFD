@@ -1,6 +1,6 @@
-$(OBJECTS_DIR)/viewFactorSky/viewFactorSky.C.dep: \
-viewFactorSky/viewFactorSky.C \
-viewFactorSky/viewFactorSky.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/$(OBJECTS_DIR)/viewFactorSky/viewFactorSky.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/viewFactorSky/viewFactorSky.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/viewFactorSky/viewFactorSky.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/surfaceFields.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/constants.H \
 $(WM_PROJECT_DIR)/src/radiationModels/lnInclude/greyDiffusiveViewFactorFixedValueFvPatchScalarField.H \
@@ -22,7 +22,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/scalarListIOList.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/polyDistributionMap.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/hashedWordList.H \
-viewFactorSky/viewFactorSkyI.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/viewFactorSky/viewFactorSkyI.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fields/surfaceFields/surfaceFields.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/constants.H \
 $(WM_PROJECT_DIR)/src/radiationModels/lnInclude/../derivedFvPatchFields/greyDiffusiveViewFactor/greyDiffusiveViewFactorFixedValueFvPatchScalarField.H \
@@ -1266,7 +1266,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/one/oneI.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/ULPtrListIO.T.C \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../containers/LinkedLists/accessTypes/ULPtrList/ULPtrListIO.T.C \
 
-viewFactorSky/viewFactorSky.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/viewFactorSky/viewFactorSky.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/surfaceFields.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/constants.H :
 $(WM_PROJECT_DIR)/src/radiationModels/lnInclude/greyDiffusiveViewFactorFixedValueFvPatchScalarField.H :
@@ -1288,7 +1288,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/scalarListIOList.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/polyDistributionMap.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/hashedWordList.H :
-viewFactorSky/viewFactorSkyI.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/viewFactorSky/viewFactorSkyI.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fields/surfaceFields/surfaceFields.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/constants.H :
 $(WM_PROJECT_DIR)/src/radiationModels/lnInclude/../derivedFvPatchFields/greyDiffusiveViewFactor/greyDiffusiveViewFactorFixedValueFvPatchScalarField.H :

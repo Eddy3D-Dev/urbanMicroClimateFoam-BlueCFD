@@ -1,6 +1,6 @@
-$(OBJECTS_DIR)/noSolarLoad/noSolarLoad.C.dep: \
-noSolarLoad/noSolarLoad.C \
-noSolarLoad/noSolarLoad.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/$(OBJECTS_DIR)/noSolarLoad/noSolarLoad.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/noSolarLoad/noSolarLoad.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/noSolarLoad/noSolarLoad.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/physicoChemicalConstants.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvMesh.H \
 ../../_blueCFDCompat/include/foamTimeCompat.H \
@@ -10,7 +10,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/physicoChemical/phy
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/fvMesh.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Time.T.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fields/volFields/volFields.H \
-noSolarLoad/../solarLoadModel/solarLoadModel.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/noSolarLoad/../solarLoadModel/solarLoadModel.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dimensionedScalar.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/polyMesh.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/lduMesh.H \
@@ -1080,7 +1080,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/SpatialTensorI.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/SpatialVector/SpatialVectorI.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/SpatialTensor/SpatialTensorI.T.H \
 
-noSolarLoad/noSolarLoad.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/noSolarLoad/noSolarLoad.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/physicoChemicalConstants.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvMesh.H :
 ../../_blueCFDCompat/include/foamTimeCompat.H :
@@ -1090,7 +1090,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/physicoChemical/phy
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/fvMesh.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Time.T.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fields/volFields/volFields.H :
-noSolarLoad/../solarLoadModel/solarLoadModel.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/noSolarLoad/../solarLoadModel/solarLoadModel.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dimensionedScalar.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/polyMesh.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/lduMesh.H :

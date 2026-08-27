@@ -1,4 +1,5 @@
 SOURCE += grassModel/grassModel.C
+SOURCE += simpleWater/simpleWater.C
 SOURCE += grassModel/grassModelNew.C
 SOURCE += noGrass/noGrass.C
 SOURCE += simpleGrass/simpleGrass.C

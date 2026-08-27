@@ -1,6 +1,6 @@
-$(OBJECTS_DIR)/directAndDiffuse/directAndDiffuse.C.dep: \
-directAndDiffuse/directAndDiffuse.C \
-directAndDiffuse/directAndDiffuse.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/$(OBJECTS_DIR)/directAndDiffuse/directAndDiffuse.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/directAndDiffuse.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/directAndDiffuse.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/surfaceFields.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/constants.H \
 lnInclude/solarLoadViewFactorFixedValueFvPatchScalarField.H \
@@ -23,10 +23,10 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/scalarListIOList.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/scalarIOList.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/polyDistributionMap.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H \
-directAndDiffuse/directAndDiffuseI.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/directAndDiffuseI.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fields/surfaceFields/surfaceFields.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/constants.H \
-directAndDiffuse/../derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/../derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/fvPatches/derived/wall/wallFvPatch.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/typeInfo.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Time.T.H \
@@ -38,7 +38,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../db/IOstreams/Fstreams/OFstream.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../include/OSspecific.H \
 $(WM_PROJECT_DIR)/src/meshTools/lnInclude/../mappedPatches/mappedPatchBase/mappedPatchBase.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/fvPatches/derived/mapped/mappedInternalFvPatch.H \
-directAndDiffuse/../solarLoadModel/solarLoadModel.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/../solarLoadModel/solarLoadModel.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/singleCellFvMesh/singleCellFvMesh.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../matrices/scalarMatrices/scalarMatrices.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../meshes/polyMesh/globalMeshData/globalIndex.H \
@@ -123,7 +123,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/electromagnetic/ele
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/atomic/atomicConstants.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/physicoChemical/physicoChemicalConstants.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/thermodynamic/thermodynamicConstants.H \
-directAndDiffuse/../derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/../derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fields/fvPatchFields/basic/fixedValue/fixedValueFvPatchFields.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/fvPatches/fvPatch/fvPatch.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../meshes/polyMesh/polyPatches/derived/wall/wallPolyPatch.H \
@@ -1301,7 +1301,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../containers/LinkedLists/accessTypes/U
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/oneI.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/one/oneI.H \
 
-directAndDiffuse/directAndDiffuse.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/directAndDiffuse.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/surfaceFields.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/constants.H :
 lnInclude/solarLoadViewFactorFixedValueFvPatchScalarField.H :
@@ -1324,10 +1324,10 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/scalarListIOList.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/scalarIOList.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/polyDistributionMap.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H :
-directAndDiffuse/directAndDiffuseI.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/directAndDiffuseI.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fields/surfaceFields/surfaceFields.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/constants.H :
-directAndDiffuse/../derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/../derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/fvPatches/derived/wall/wallFvPatch.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/typeInfo.T.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Time.T.H :
@@ -1339,7 +1339,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../db/IOstreams/Fstreams/OFstream.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../include/OSspecific.H :
 $(WM_PROJECT_DIR)/src/meshTools/lnInclude/../mappedPatches/mappedPatchBase/mappedPatchBase.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/fvPatches/derived/mapped/mappedInternalFvPatch.H :
-directAndDiffuse/../solarLoadModel/solarLoadModel.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/../solarLoadModel/solarLoadModel.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/singleCellFvMesh/singleCellFvMesh.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../matrices/scalarMatrices/scalarMatrices.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../meshes/polyMesh/globalMeshData/globalIndex.H :
@@ -1424,7 +1424,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/electromagnetic/ele
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/atomic/atomicConstants.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/physicoChemical/physicoChemicalConstants.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../global/constants/thermodynamic/thermodynamicConstants.H :
-directAndDiffuse/../derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/directAndDiffuse/../derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fields/fvPatchFields/basic/fixedValue/fixedValueFvPatchFields.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../fvMesh/fvPatches/fvPatch/fvPatch.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../meshes/polyMesh/polyPatches/derived/wall/wallPolyPatch.H :

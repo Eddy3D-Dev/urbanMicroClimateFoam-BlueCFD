@@ -1,6 +1,6 @@
-$(OBJECTS_DIR)/derivedFvPatchFields/CFDHAMfluidMoistureCoupledMixed/CFDHAMfluidMoistureCoupledMixedFvPatchScalarField.C.dep: \
-derivedFvPatchFields/CFDHAMfluidMoistureCoupledMixed/CFDHAMfluidMoistureCoupledMixedFvPatchScalarField.C \
-derivedFvPatchFields/CFDHAMfluidMoistureCoupledMixed/CFDHAMfluidMoistureCoupledMixedFvPatchScalarField.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/$(OBJECTS_DIR)/derivedFvPatchFields/CFDHAMfluidMoistureCoupledMixed/CFDHAMfluidMoistureCoupledMixedFvPatchScalarField.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/derivedFvPatchFields/CFDHAMfluidMoistureCoupledMixed/CFDHAMfluidMoistureCoupledMixedFvPatchScalarField.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/derivedFvPatchFields/CFDHAMfluidMoistureCoupledMixed/CFDHAMfluidMoistureCoupledMixedFvPatchScalarField.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addToRunTimeSelectionTable.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchFieldMapper.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H \
@@ -1100,7 +1100,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../containers/LinkedLists/accessTypes/U
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/globalIndexAndTransformI.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/globalIndexAndTransform/globalIndexAndTransformI.H \
 
-derivedFvPatchFields/CFDHAMfluidMoistureCoupledMixed/CFDHAMfluidMoistureCoupledMixedFvPatchScalarField.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/derivedFvPatchFields/CFDHAMfluidMoistureCoupledMixed/CFDHAMfluidMoistureCoupledMixedFvPatchScalarField.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addToRunTimeSelectionTable.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchFieldMapper.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H :
