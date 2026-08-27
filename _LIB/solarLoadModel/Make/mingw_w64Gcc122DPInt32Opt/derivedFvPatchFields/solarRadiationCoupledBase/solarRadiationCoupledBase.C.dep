@@ -1,6 +1,6 @@
-$(OBJECTS_DIR)/derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.C.dep: \
-derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.C \
-derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/$(OBJECTS_DIR)/derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/fieldMapper.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/mappedFvPatchBaseBase.H \
@@ -1097,7 +1097,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../containers/LinkedLists/accessTypes/U
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/globalIndexAndTransformI.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/globalIndexAndTransform/globalIndexAndTransformI.H \
 
-derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/derivedFvPatchFields/solarRadiationCoupledBase/solarRadiationCoupledBase.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/fieldMapper.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/mappedFvPatchBaseBase.H :

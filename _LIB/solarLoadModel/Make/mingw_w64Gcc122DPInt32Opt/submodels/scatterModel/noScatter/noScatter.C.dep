@@ -1,6 +1,6 @@
-$(OBJECTS_DIR)/submodels/scatterModel/noScatter/noScatter.C.dep: \
-submodels/scatterModel/noScatter/noScatter.C \
-submodels/scatterModel/noScatter/noScatter.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/$(OBJECTS_DIR)/submodels/scatterModel/noScatter/noScatter.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/submodels/scatterModel/noScatter/noScatter.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/submodels/scatterModel/noScatter/noScatter.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addToRunTimeSelectionTable.H \
 lnInclude/solarLoadScatterModel.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../db/runTimeSelection/construction/addToRunTimeSelectionTable.H \
@@ -1076,7 +1076,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/SpatialTensorI.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/SpatialVector/SpatialVectorI.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/SpatialTensor/SpatialTensorI.T.H \
 
-submodels/scatterModel/noScatter/noScatter.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/submodels/scatterModel/noScatter/noScatter.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addToRunTimeSelectionTable.H :
 lnInclude/solarLoadScatterModel.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../db/runTimeSelection/construction/addToRunTimeSelectionTable.H :

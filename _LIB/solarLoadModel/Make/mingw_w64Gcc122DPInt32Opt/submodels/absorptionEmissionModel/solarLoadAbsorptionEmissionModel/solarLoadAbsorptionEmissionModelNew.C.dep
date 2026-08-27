@@ -1,7 +1,7 @@
-$(OBJECTS_DIR)/submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModelNew.C.dep: \
-submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModelNew.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/$(OBJECTS_DIR)/submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModelNew.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModelNew.C \
 ../../_blueCFDCompat/include/error.H \
-submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModel.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModel.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/error.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/IOdictionary.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/autoPtr.H \
@@ -1075,7 +1075,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/Spat
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/SpatialTensor/SpatialTensorI.T.H \
 
 ../../_blueCFDCompat/include/error.H :
-submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModel.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModel.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/error.T.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/IOdictionary.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/autoPtr.H :

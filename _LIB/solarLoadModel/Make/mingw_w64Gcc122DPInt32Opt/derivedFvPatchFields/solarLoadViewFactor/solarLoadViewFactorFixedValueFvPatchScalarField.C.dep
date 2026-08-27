@@ -1,6 +1,6 @@
-$(OBJECTS_DIR)/derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.C.dep: \
-derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.C \
-derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/$(OBJECTS_DIR)/derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addToRunTimeSelectionTable.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/fieldMapper.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H \
@@ -1083,7 +1083,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/SpatialTensorI.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/SpatialVector/SpatialVectorI.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/SpatialTensor/SpatialTensorI.T.H \
 
-derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/derivedFvPatchFields/solarLoadViewFactor/solarLoadViewFactorFixedValueFvPatchScalarField.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/addToRunTimeSelectionTable.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/fieldMapper.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H :

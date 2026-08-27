@@ -1,6 +1,6 @@
-$(OBJECTS_DIR)/solarLoadModel/solarLoadModel.C.dep: \
-solarLoadModel/solarLoadModel.C \
-solarLoadModel/solarLoadModel.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/$(OBJECTS_DIR)/solarLoadModel/solarLoadModel.C.dep: \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/solarLoadModel/solarLoadModel.C \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/solarLoadModel/solarLoadModel.H \
 lnInclude/solarLoadAbsorptionEmissionModel.H \
 lnInclude/solarLoadScatterModel.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvmSup.H \
@@ -13,8 +13,8 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H \
 ../../_blueCFDCompat/include/DimensionedField.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvMatricesFwd.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Switch.H \
-solarLoadModel/../submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModel.H \
-solarLoadModel/../submodels/scatterModel/solarLoadScatterModel/solarLoadScatterModel.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/solarLoadModel/../submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModel.H \
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/solarLoadModel/../submodels/scatterModel/solarLoadScatterModel/solarLoadScatterModel.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../finiteVolume/fvm/fvmSup.H \
 $(WM_PROJECT_DIR)/src/thermophysicalModels/basic/lnInclude/../basicThermo/basicThermo.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../db/IOobjects/IOdictionary/IOdictionary.H \
@@ -1216,7 +1216,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/SpatialTensorI.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/SpatialVector/SpatialVectorI.T.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../primitives/spatialVectorAlgebra/SpatialTensor/SpatialTensorI.T.H \
 
-solarLoadModel/solarLoadModel.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/solarLoadModel/solarLoadModel.H :
 lnInclude/solarLoadAbsorptionEmissionModel.H :
 lnInclude/solarLoadScatterModel.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvmSup.H :
@@ -1229,8 +1229,8 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H :
 ../../_blueCFDCompat/include/DimensionedField.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvMatricesFwd.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Switch.H :
-solarLoadModel/../submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModel.H :
-solarLoadModel/../submodels/scatterModel/solarLoadScatterModel/solarLoadScatterModel.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/solarLoadModel/../submodels/absorptionEmissionModel/solarLoadAbsorptionEmissionModel/solarLoadAbsorptionEmissionModel.H :
+D:/GithubProjects/urbanMicroClimateFoam-BlueCFD/_LIB/solarLoadModel/solarLoadModel/../submodels/scatterModel/solarLoadScatterModel/solarLoadScatterModel.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/../finiteVolume/fvm/fvmSup.H :
 $(WM_PROJECT_DIR)/src/thermophysicalModels/basic/lnInclude/../basicThermo/basicThermo.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/../db/IOobjects/IOdictionary/IOdictionary.H :

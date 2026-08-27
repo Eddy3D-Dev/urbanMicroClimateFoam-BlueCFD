@@ -1,4 +1,5 @@
 grassModel/grassModel.C
+simpleWater/simpleWater.C
 grassModel/grassModelNew.C
 noGrass/noGrass.C
 simpleGrass/simpleGrass.C
