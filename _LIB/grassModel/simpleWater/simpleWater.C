@@ -119,8 +119,8 @@ void Foam::grass::simpleWater::calculate
         const scalarField airT = patch.patchInternalField(T);
         const scalarField airW = patch.patchInternalField(w);
         const vectorField airU = patch.patchInternalField(U);
-        const scalarField qs = patch.lookupPatchField<volScalarField, scalar>("qs");
-        const scalarField qr = patch.lookupPatchField<volScalarField, scalar>("qr");
+        scalarField qs(patch.size(), 0.0); if (mesh_.foundObject<volScalarField>("qs")) qs = patch.lookupPatchField<volScalarField, scalar>("qs");
+        scalarField qr(patch.size(), 0.0); if (mesh_.foundObject<volScalarField>("qr")) qr = patch.lookupPatchField<volScalarField, scalar>("qr");
         const scalarField delta = patch.deltaCoeffs();
         const vectorField normals = patch.nf();
         scalarField waterT = patch.patchInternalField(Tw_);
